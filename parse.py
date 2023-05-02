@@ -15,5 +15,5 @@ def parse(circuit):
 
     return result_json
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     print(parse('Circuits.net'))
