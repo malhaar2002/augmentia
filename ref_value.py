@@ -9,4 +9,4 @@ def ref_value(circuit):
     return resultDict
 
 if __name__ == '__main__':
-    print(ref_value('Circuits.net'))
+    print(ref_value('circuits/servo_motor.net'))

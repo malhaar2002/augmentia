@@ -16,4 +16,4 @@ def parse(circuit):
     return result_json
 
 if __name__ == '__main__':
-    print(parse('Circuits.net'))
+    print(parse('circuits/ultrasonic_sensor.net'))
