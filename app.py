@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
-from blender import make_glb
+import os
+from waitress import serve
 
 app = Flask(__name__)
 
@@ -11,8 +12,10 @@ def index():
 def model():
     file = request.files['file']
     file.save('static/netlist_file/circuit.net')
-    make_glb()
+    os.system("blender --background --python blender.py")
     return render_template('model_display.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
+    # For production server:
+    # serve(app, host="0.0.0.0", port=8080)
