@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Augmentia - View Model</title>
+    <meta charset="utf-8">
+    <meta name="description" content="&lt;model-viewer&gt; template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link type="text/css" href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet"/>
+  </head>
+  <body>
+    <!-- <model-viewer> HTML element -->
+    <model-viewer src="{{ url_for('static', filename='models/ImageToStl.com_blinking+light.glb') }}" ar ar-modes="webxr scene-viewer quick-look" camera-controls poster="{{ url_for('static', filename='images/poster.webp') }}" shadow-intensity="1" camera-orbit="-127.1deg 70.31deg 116.2m" field-of-view="30deg">
+      <div class="progress-bar hide" slot="progress-bar">
+          <div class="update-bar"></div>
+      </div>
+      <button slot="ar-button" id="ar-button">
+          View in your space
+      </button>
+      <div id="ar-prompt">
+          <img src="{{ url_for('static', filename='images/ar_hand_prompt.png') }}">
+      </div>
+    </model-viewer>  
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <!-- Loads <model-viewer> for browsers: -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.0.1/model-viewer.min.js"></script>
+  </body>
+</html>

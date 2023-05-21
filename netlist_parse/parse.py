@@ -1,5 +1,14 @@
 from kinparse import parse_netlist
 
+def form_string(ref, func, num):
+    if func != '':
+        return f"{ref}_{func}"
+    else:
+        if num == '1':
+            return f"{ref}_K"
+        elif num == '2':
+            return f"{ref}_A"
+
 def parse(circuit):
     nlst = parse_netlist(circuit)
 
@@ -9,8 +18,8 @@ def parse(circuit):
 
     for connection_list in connected_nets:
         pins = connection_list.pins
-        key = pins[0].ref + "-" + pins[0].num
-        value = {'ref': pins[1].ref, 'num': pins[1].num, 'function': pins[1].function}
+        key = form_string(pins[0].ref, pins[0].function, pins[0].num)
+        value = form_string(pins[1].ref, pins[1].function, pins[1].num)
         result_json[key] = value
 
     return result_json
