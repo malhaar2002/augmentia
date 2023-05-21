@@ -48,10 +48,13 @@ if len(inc_obj) == 1:
                 one_side = False
     
     if place == 0:
+        coeff = 1
+        if inc_obj[0] == "R":
+            coeff = -1
         if int(list(con.items())[0][0].split("_")[1]) in range(15,31):
-            cord.y += 50 # Malhaar- decide + or - based on which side the port on arduino is (add if cond)
+            cord.y += coeff*50 # Malhaar- decide + or - based on which side the port on arduino is (add if cond)
         else:
-            cord.y -= 50
+            cord.y -= coeff*50
     else:
         reference_object = bpy.data.objects['arduino']
         cord = reference_object.location.copy()

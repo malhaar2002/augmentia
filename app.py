@@ -16,6 +16,6 @@ def model():
     return render_template('model_display.html')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # app.run(debug=True)
     # For production server:
-    # serve(app, host="0.0.0.0", port=8080)
+    serve(app, host="0.0.0.0", port=8080)
