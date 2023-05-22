@@ -19,4 +19,4 @@ def parse(circuit):
     return result_json
 
 if __name__ == '__main__':
-    print(parse('circuits/Scheme6.net'))
+    print(parse('circuits/Circuits.net'))

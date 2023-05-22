@@ -9,7 +9,7 @@
   </head>
   <body>
     <!-- <model-viewer> HTML element -->
-    <model-viewer src="{{ url_for('static', filename='models/final_model.glb') }}" ar ar-modes="webxr scene-viewer quick-look" camera-controls poster="{{ url_for('static', filename='images/poster.webp') }}" shadow-intensity="1" camera-orbit="-127.1deg 70.31deg 116.2m" field-of-view="30deg">
+    <model-viewer src="{{ url_for('static', filename='models/final_model.glb') }}" ar ar-modes="webxr scene-viewer quick-look" camera-controls shadow-intensity="1" camera-orbit="-127.1deg 70.31deg 116.2m" field-of-view="30deg">
       <div class="progress-bar hide" slot="progress-bar">
           <div class="update-bar"></div>
       </div>

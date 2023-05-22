@@ -12,4 +12,4 @@ def ref_value(circuit):
     return resultDict
 
 if __name__ == '__main__':
-   print(ref_value('circuits/Circuits.net') )
+   print(ref_value('/home/malhaar/Downloads/res.net') )

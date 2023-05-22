@@ -12,7 +12,7 @@ bpy.ops.object.select_by_type(type='MESH')
 bpy.ops.object.delete()
 
 # Path to the .blend file
-blend_path = {"LED":"static/blend_files/LED_2.blend", "R":"static/blend_files/resistor.blend"}
+blend_path = {"LED":"static/blend_files/LED_2.blend", "R_Small":"static/blend_files/resistor.blend", "R":"static/blend_files/resistor.blend"}
 blend_file_path_arduino = "static/blend_files/arduino.blend"
 
 # Load Arduino objects
@@ -59,6 +59,7 @@ if len(inc_obj) == 1:
 
     cord.z += 40
 
+    print('Included obj', inc_obj)
     with bpy.data.libraries.load(blend_path[inc_obj[0]]) as (data_from, data_to):
         data_to.objects = [name for name in data_from.objects]
 
@@ -84,7 +85,116 @@ if len(inc_obj) == 1:
 
     # Update the scene
     bpy.context.view_layer.update()
+
+elif len(inc_obj) == 2:
+
+    # Get reference object from Arduino
+
+    reference_object = bpy.data.objects[list(con.items())[0][0]]
+
+    cord = reference_object.location.copy()
+
+    if int(list(con.items())[0][0].split("_")[1]) in range(15,31):
+
+        cord.y += 50
+
+    else:
+
+        cord.y -= 50
+
+    cord.z += 30
+
+ 
+
+    with bpy.data.libraries.load(blend_path[ref_val[(list(con.items())[0][1]).split("_")[0][0]]]) as (data_from, data_to):
+
+        data_to.objects = [name for name in data_from.objects]
+
+ 
+
+    relative_positions = {}
+
+    bpy.ops.object.select_all(action='DESELECT')
+
+ 
+
+    for obj in data_to.objects:
+
+        # Calculate the offset of each object from the reference object
+
+        offset = obj.location * 5
+
+        # Store the offset in the dictionary
+
+        relative_positions[obj.name] = offset
+
+        # Set the location of the object to the new position
+
+        obj.location = cord + offset
+
+        obj.scale *= 5
+
+ 
+
+        bpy.context.collection.objects.link(obj)
+
+ 
+
+    inc_obj.remove(ref_val[(list(con.items())[0][1]).split("_")[0][0]])
+
+ 
+
+    if (list(con.items())[0][1]).split("_")[1] == "1":
+
+        temp = (list(con.items())[0][1]).split("_")[0]+"_2"
+
+    else:
+
+        temp = (list(con.items())[0][1]).split("_")[0]+"_1"
+
+    reference_object = bpy.data.objects[temp]
+
+    cord = reference_object.location.copy()
+
+    cord.x += 50
+
+    cord.z += 30
+
+ 
+
+    with bpy.data.libraries.load(blend_path[inc_obj[0]]) as (data_from, data_to):
+
+        data_to.objects = [name for name in data_from.objects]
+
+ 
+
+    relative_positions = {}
+
+    bpy.ops.object.select_all(action='DESELECT')
+
+ 
+
+    for obj in data_to.objects:
+
+        # Calculate the offset of each object from the reference object
+
+        offset = obj.location * 5
+
+        # Store the offset in the dictionary
+
+        relative_positions[obj.name] = offset
+
+        # Set the location of the object to the new position
+
+        obj.location = cord + offset
+
+        obj.scale *= 5
+
+ 
+
+        bpy.context.collection.objects.link(obj)
     
+
 bpy.ops.object.select_all(action='DESELECT')
 # deselect all the objects to avoid to edit all together
 #bpy.ops.object.mode_set(mode='OBJECT')
